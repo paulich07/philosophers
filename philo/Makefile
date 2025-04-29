@@ -23,6 +23,7 @@ CFLAGS = -Wall -Werror -Wextra -g -I$(HEADERS_DIR) -I$(SRC_DIR) -pthread
 
 # Sources
 SRCS =	$(SRC_DIR)/main.c \
+				$(SRC_DIR)/utils.c \
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
