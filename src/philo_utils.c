@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   simulation_one.c                                   :+:      :+:    :+:   */
+/*   philo_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 22:30:20 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 01:58:21 by plichota         ###   ########.fr       */
+/*   Created: 2025/07/24 01:48:41 by plichota          #+#    #+#             */
+/*   Updated: 2025/07/24 01:51:48 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// case one philosopher (can't eat)
-int	one_philosopher(t_table *table)
+// to do aggiungere altri controlli morte (+ sync)
+int	check_starving_death(t_philo *philo)
 {
-	table->start_time = get_time_in_ms(); // poco prima del thread
-	// takes fork (print)
-	// usleep
-	// dies after time_to_die (print)
+	if ()
+	{
+    set_death(philo->table);
+		safe_print(philo, "died");
+		return (1);
+	}
 	return (0);
 }

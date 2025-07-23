@@ -24,7 +24,7 @@ CFLAGS = -Wall -Werror -Wextra -g -I$(HEADERS_DIR) -I$(SRC_DIR) -pthread
 # Sources
 SRCS =	\
 		$(SRC_DIR)/actions.c \
-		$(SRC_DIR)/common.c \
+		$(SRC_DIR)/common_utils.c \
 		$(SRC_DIR)/free_table.c \
 		$(SRC_DIR)/main.c \
 		$(SRC_DIR)/parsing.c \

@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:33:16 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 01:48:23 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ typedef struct s_philo
 {
 	int					id;
 	int					meals;
-	unsigned long long	starving_time;
+	unsigned long long	start_starving_time;
 	pthread_t			thread;
 	pthread_mutex_t		*fork_left;
 	pthread_mutex_t		*fork_right;
@@ -64,19 +64,25 @@ int					one_philosopher(t_table *table);
 void				*eat_sleep_think_routine(void *arg);
 
 // Actions
-void				take_forks_and_eat(t_philo *philo);
+void				take_forks(t_philo *philo);
+void				eat(t_philo *philo);
+void				sleep(t_philo *philo);
+void				think(t_philo *philo);
 
-// Common
+// Common Utils
 void				safe_print(t_philo *philo, char *str);
 int					set_death(t_table *table);
 int					check_death(t_philo *philo);
+
+// Philo Utils
+int					check_starving_death(t_philo *philo);
 
 // Cleanup
 void				free_forks(pthread_mutex_t *forks, int n);
 int					free_table(t_table *table);
 
 // Time
-unsigned long long	get_system_time_in_ms(void);
-unsigned long long	get_program_time(t_table *table);
+unsigned long long	get_system_time_ms(void);
+unsigned long long	get_timestamp(t_table *table);
 
 #endif

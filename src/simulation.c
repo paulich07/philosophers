@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:15:21 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 01:58:20 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,17 +52,17 @@ int	init_common_mutex(t_table *table)
 void	init_philosophers(t_philo *philosophers, t_table *table)
 {
 	int	i;
-	int	n_of_philosophers;
+	int	n;
 
 	i = 0;
-	n_of_philosophers = table->number_of_philosophers;
+	n = table->number_of_philosophers;
 	while (i < table->number_of_philosophers)
 	{
 		philosophers[i].id = i;
 		philosophers[i].meals = 0;
-		philosophers[i].starving_time = 0;
+		philosophers[i].start_starving_time = get_system_time_ms();
 		philosophers[i].fork_left = &table->forks[i];
-		philosophers[i].fork_left = &table->forks[(i + 1) % n_of_philosophers];
+		philosophers[i].fork_right = &table->forks[(i + 1) % n];
 		philosophers[i].table = table;
 		i++;
 	}
@@ -82,6 +82,8 @@ int	init_threads(t_philo *philosophers, t_table *table)
 
 // initialize structs, forks, mutexes, threads.
 // run simulation
+// initialize start_time just before the creation of threads
+// to avoid elapsed time before the threads are created
 int	init_simulation(t_table *table)
 {
 	t_philo	*philosophers;
@@ -94,6 +96,7 @@ int	init_simulation(t_table *table)
 		return (printf("Error initializing common mutex\n"),
 			free(philosophers), 2);
 	init_philosophers(philosophers, table);
+	table->start_time = get_time_in_ms();
 	if (init_threads(philosophers, table) != 0)
 		return (printf("Error initializing threads\n"),
 			free(philosophers), free_table(table), 3);
