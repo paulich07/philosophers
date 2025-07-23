@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 22:05:51 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/23 22:26:55 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,5 +57,14 @@ typedef struct s_philo
 	pthread_mutex_t		*fork_right;
 	t_params			*table;
 }	t_philo;
+
+
+// Parsing
+void	assign_params(t_params *params, int argc, char *argv[]);
+int		parse_args(t_params *params, int argc, char *argv[]);
+
+// Simulation
+int		init_simulation(t_params params);
+int		one_philosopher(t_params params);
 
 #endif
