@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:03:59 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:06:00 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,6 +68,11 @@ void	init_philosophers(t_philo *philosophers, t_table *table)
 	}
 }
 
+int	init_threads(t_philo *philosophers, t_table *table)
+{
+	
+}
+
 // initialize structs, forks, mutexes, threads.
 // run simulation
 int	init_simulation(t_table *table)
@@ -82,5 +87,7 @@ int	init_simulation(t_table *table)
 		return (printf("Error initializing common mutex\n"),
 			free(philosophers), 2);
 	init_philosophers(philosophers, table);
-
+	if (init_threads(philosophers, table) != 0)
+		return (printf("Error initializing threads\n"),
+			free(philosophers), free_table(table), 3);
 }
