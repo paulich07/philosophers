@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 17:12:17 by plichota          #+#    #+#             */
-/*   Updated: 2025/04/29 21:19:39 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/22 13:29:26 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,15 +47,15 @@ int	ft_atoi(const char *str)
 
 int is_number(char *s)
 {
-  if (!s)
-    return (0);
-  if (*s == '+' || *s == '-')
-    s++;
-  while (*s != '\0')
-  {
-    if (*s < '0' || *s > '9')
-      return (0);
-    s++;
-  }
-  return (1);
+	if (!s)
+		return (0);
+	if (*s == '+' || *s == '-')
+		s++;
+	while (*s != '\0')
+	{
+		if (*s < '0' || *s > '9')
+			return (0);
+		s++;
+	}
+	return (1);
 }

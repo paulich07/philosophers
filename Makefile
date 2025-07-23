@@ -22,8 +22,13 @@ CC = cc
 CFLAGS = -Wall -Werror -Wextra -g -I$(HEADERS_DIR) -I$(SRC_DIR) -pthread
 
 # Sources
-SRCS =	$(SRC_DIR)/main.c \
-				$(SRC_DIR)/utils.c \
+SRCS =	\
+		$(SRC_DIR)/main.c \
+		$(SRC_DIR)/parsing.c \
+		$(SRC_DIR)/mutex_utils.c \
+		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/time.c \
+		$(SRC_DIR)/simulation.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 

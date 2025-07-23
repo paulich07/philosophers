@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo.h                                            :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/04/29 16:56:41 by plichota         ###   ########.fr       */
+/*   Created: 2025/04/29 15:54:05 by plichota          #+#    #+#             */
+/*   Updated: 2025/07/23 22:08:05 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PHILO_H
-# define PHILO_H
+#include "philo.h"
 
-# ifndef MAX_ALLOWED_THREADS
-#  define MAX_ALLOWED_THREADS = 10000
-# endif
+int	main(int argc, char *argv[])
+{
+	t_params	params = {0};
 
-# include <stdlib.h>
-# include <stdio.h>
-# include <unistd.h>
-# include <string.h>
-# include <signal.h>
-# include <pthread.h> // aggiungi -pthread in coompilazione
-# include <semaphore.h>
-# include <sys/time.h>
-# include <sys/wait.h>
-
-#endif
+	if (argc < 5 || argc > 6)
+		return (printf("Wrong usage of arguments\n"), 1);
+	if (parse_args(&params, argc, argv) != 0)
+		return (1);
+	assign_params(&params, argc, argv);
+	params.start_time = get_time_in_ms();
+	if (argc == 5)
+		init_simulation(params);
+	else if (argc == 6)
+		one_philosopher(params);
+}
