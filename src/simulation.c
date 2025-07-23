@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:06:00 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:15:21 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,14 @@ void	init_philosophers(t_philo *philosophers, t_table *table)
 
 int	init_threads(t_philo *philosophers, t_table *table)
 {
-	
+	int	i;
+
+	i = 0;
+	while (i < table->number_of_philosophers)
+	{
+		pthread_create(&philosophers[i].thread, NULL,
+			eat_sleep_think_routine, &philosophers[i]);
+	}
 }
 
 // initialize structs, forks, mutexes, threads.

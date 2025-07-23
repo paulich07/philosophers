@@ -1,27 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_mutex.c                                     :+:      :+:    :+:   */
+/*   routine.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 23:43:01 by plichota         ###   ########.fr       */
+/*   Created: 2025/07/24 00:13:09 by plichota          #+#    #+#             */
+/*   Updated: 2025/07/24 00:14:54 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-int	check_death(t_philo *philo)
-{
-	int	i;
-
-	i = 0;
-	// prendo il mutex di check_death del filosofo
-	// salvo risultato nella variabile i
-	// unlock del mutex
-	return (i);
-}
 
 void	*eat_sleep_think_routine(void *arg)
 {

@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:11:29 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:16:44 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,12 @@ int		parse_args(t_table *table, int argc, char *argv[]);
 // Simulation
 int		init_simulation(t_table *table);
 int		one_philosopher(t_table *table);
+
+// Routine
+void	*eat_sleep_think_routine(void *arg);
+
+// Common
+int		check_death(t_philo *philo);
 
 // Cleanup
 void	free_forks(pthread_mutex_t *forks, int n);

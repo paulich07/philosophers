@@ -23,12 +23,15 @@ CFLAGS = -Wall -Werror -Wextra -g -I$(HEADERS_DIR) -I$(SRC_DIR) -pthread
 
 # Sources
 SRCS =	\
+		$(SRC_DIR)/common.c \
+		$(SRC_DIR)/free_table.c \
 		$(SRC_DIR)/main.c \
 		$(SRC_DIR)/parsing.c \
-		$(SRC_DIR)/common_mutex.c \
-		$(SRC_DIR)/utils.c \
+		$(SRC_DIR)/routine.c \
+		$(SRC_DIR)/simulation_one.c \
+		$(SRC_DIR)/simulation.c \
 		$(SRC_DIR)/time.c \
-		$(SRC_DIR)/simulation.c
+		$(SRC_DIR)/utils.c
 
 OBJS = $(SRCS:$(SRC_DIR)/%.c=$(OBJ_DIR)/%.o)
 
