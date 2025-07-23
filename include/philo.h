@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:31:32 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:33:16 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ void				*eat_sleep_think_routine(void *arg);
 void				take_forks_and_eat(t_philo *philo);
 
 // Common
+void				safe_print(t_philo *philo, char *str);
 int					set_death(t_table *table);
 int					check_death(t_philo *philo);
 

@@ -6,13 +6,18 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:31:40 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:33:04 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-
+void	safe_print(t_philo *philo, char *str)
+{
+	pthread_mutex_lock(&philo->table->print);
+	printf("%s\n", str);
+	pthread_mutex_unlock(&philo->table->print);
+}
 
 int	set_death(t_table *table)
 {
