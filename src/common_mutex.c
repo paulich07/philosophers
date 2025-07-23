@@ -1,30 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   common_mutex.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/04/29 15:54:05 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 22:58:25 by plichota         ###   ########.fr       */
+/*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
+/*   Updated: 2025/07/23 22:42:28 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	main(int argc, char *argv[])
+int	check_death(t_philo *philo)
 {
-	t_params	params;
+	int	i;
 
-	params = (t_params){0};
-	if (argc < 5 || argc > 6)
-		return (printf("Wrong usage of arguments\n"), 1);
-	if (parse_args(&params, argc, argv) != 0)
-		return (1);
-	params.start_time = get_time_in_ms();
-	if (argc == 5)
-		init_simulation(params);
-	else if (argc == 6)
-		one_philosopher(params);
-	return (0);
+	i = 0;
+	// prendo il mutex di check_death del filosofo
+	// salvo risultato nella variabile i
+	// unlock del mutex
+	return (i);
 }
+
+void	*eat_sleep_think_routine(void *arg)
+{
+	t_philo		*philo;
+	t_params	*table;
+
+	philo = (t_philo *) arg;
+	table = philo->table;
+	while (!check_death(philo))
+	{
+		// take forks and eat
+	
+		// sleep
+	
+		// think
+	}
+	return (NULL);
+}
+

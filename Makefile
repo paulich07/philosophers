@@ -25,7 +25,7 @@ CFLAGS = -Wall -Werror -Wextra -g -I$(HEADERS_DIR) -I$(SRC_DIR) -pthread
 SRCS =	\
 		$(SRC_DIR)/main.c \
 		$(SRC_DIR)/parsing.c \
-		$(SRC_DIR)/mutex_utils.c \
+		$(SRC_DIR)/common_mutex.c \
 		$(SRC_DIR)/utils.c \
 		$(SRC_DIR)/time.c \
 		$(SRC_DIR)/simulation.c
@@ -60,5 +60,8 @@ fclean: clean
 	fi
 
 re: fclean all
+
+val: $(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=helgrind ./$(NAME)
  
-.PHONY: all clean fclean re
+.PHONY: all clean fclean re val
