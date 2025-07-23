@@ -6,11 +6,13 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:21:05 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:31:40 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
+
+
 
 int	set_death(t_table *table)
 {

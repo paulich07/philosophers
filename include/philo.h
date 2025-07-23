@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:21:02 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:31:32 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,22 +53,29 @@ typedef struct s_philo
 
 
 // Parsing
-void	assign_params(t_table *table, int argc, char *argv[]);
-int		parse_args(t_table *table, int argc, char *argv[]);
+void				assign_params(t_table *table, int argc, char *argv[]);
+int					parse_args(t_table *table, int argc, char *argv[]);
 
 // Simulation
-int		init_simulation(t_table *table);
-int		one_philosopher(t_table *table);
+int					init_simulation(t_table *table);
+int					one_philosopher(t_table *table);
 
 // Routine
-void	*eat_sleep_think_routine(void *arg);
+void				*eat_sleep_think_routine(void *arg);
+
+// Actions
+void				take_forks_and_eat(t_philo *philo);
 
 // Common
-int		set_death(t_table *table);
-int		check_death(t_philo *philo);
+int					set_death(t_table *table);
+int					check_death(t_philo *philo);
 
 // Cleanup
-void	free_forks(pthread_mutex_t *forks, int n);
-int		free_table(t_table *table);
+void				free_forks(pthread_mutex_t *forks, int n);
+int					free_table(t_table *table);
+
+// Time
+unsigned long long	get_system_time_in_ms(void);
+unsigned long long	get_program_time(t_table *table);
 
 #endif

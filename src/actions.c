@@ -1,32 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   routine.c                                          :+:      :+:    :+:   */
+/*   actions.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/24 00:13:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:26:50 by plichota         ###   ########.fr       */
+/*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
+/*   Updated: 2025/07/24 00:31:59 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	*eat_sleep_think_routine(void *arg)
+// per evitare deadlock i filosofi pari prendono prima a destra
+// e i filosofi dispari prendono prima a sinistra
+void	take_forks_and_eat(t_philo *philo)
 {
-	t_philo	*philo;
-	t_table	*table;
-
-	philo = (t_philo *) arg;
-	table = philo->table;
-	while (!check_death(philo))
+	if (philo->id % 2 == 0)
 	{
-		take_forks_and_eat(philo);
-		// take forks and eat
-	
-		// sleep
-	
-		// think
+		pthread_mutex_lock(philo->fork_left);
+        // to do safe print everything
+		pthread_mutex_lock(philo->fork_right);
 	}
-	return (NULL);
+	else
+	{
+		pthread_mutex_lock(philo->fork_right);
+		pthread_mutex_lock(philo->fork_left);
+	}
 }
