@@ -1,42 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   common_mutex.c                                     :+:      :+:    :+:   */
+/*   free_table.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 23:43:01 by plichota         ###   ########.fr       */
+/*   Created: 2025/07/23 23:48:32 by plichota          #+#    #+#             */
+/*   Updated: 2025/07/23 23:48:37 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-int	check_death(t_philo *philo)
+int	free_table(t_table *table)
 {
 	int	i;
 
 	i = 0;
-	// prendo il mutex di check_death del filosofo
-	// salvo risultato nella variabile i
-	// unlock del mutex
-	return (i);
-}
-
-void	*eat_sleep_think_routine(void *arg)
-{
-	t_philo	*philo;
-	t_table	*table;
-
-	philo = (t_philo *) arg;
-	table = philo->table;
-	while (!check_death(philo))
+	while (i < table->number_of_philosophers)
 	{
-		// take forks and eat
-	
-		// sleep
-	
-		// think
+		pthread_mutex_destroy(&table->forks[i]);
+		i++;
 	}
-	return (NULL);
+	free(table->forks);
+	return (0);
 }

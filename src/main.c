@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:54:05 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 22:58:25 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:44:20 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,17 +14,17 @@
 
 int	main(int argc, char *argv[])
 {
-	t_params	params;
+	t_table	table;
 
-	params = (t_params){0};
+	table = (t_table){0};
 	if (argc < 5 || argc > 6)
 		return (printf("Wrong usage of arguments\n"), 1);
-	if (parse_args(&params, argc, argv) != 0)
+	if (parse_args(&table, argc, argv) != 0)
 		return (1);
-	params.start_time = get_time_in_ms();
+	table.start_time = get_time_in_ms();
 	if (argc == 5)
-		init_simulation(params);
+		init_simulation(&table);
 	else if (argc == 6)
-		one_philosopher(params);
+		one_philosopher(&table);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 22:50:32 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:01:17 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,18 +26,7 @@
 # include <sys/time.h>
 # include <sys/wait.h>
 
-// mutex di monitoraggio e stampa
-typedef struct s_mutex
-{
-	pthread_mutex_t	check_death;
-	pthread_mutex_t	log;
-	pthread_mutex_t	*forks;
-	// pthread_mutex_t	check_n_meals;
-	// pthread_mutex_t	update_starving_time;
-	// pthread_mutex_t	update_meals;
-}	t_mutex;
-
-typedef struct s_params
+typedef struct s_table
 {
 	int					number_of_philosophers;
 	int					time_to_die;
@@ -46,26 +35,29 @@ typedef struct s_params
 	int					number_of_times_each_philosopher_must_eat;
 	int					died;
 	unsigned long long	start_time;
-}	t_params;
+	pthread_mutex_t		check_death;
+	pthread_mutex_t		print;
+	pthread_mutex_t		*forks;
+}	t_table;
 
 typedef struct s_philo
 {
 	int					id;
 	int					meals;
 	unsigned long long	starving_time;
+	pthread_t			thread;
 	pthread_mutex_t		*fork_left;
 	pthread_mutex_t		*fork_right;
-	t_params			*params;
-	t_mutex				*mutexes;
+	t_table				*table;
 }	t_philo;
 
 
 // Parsing
-void	assign_params(t_params *params, int argc, char *argv[]);
-int		parse_args(t_params *params, int argc, char *argv[]);
+void	assign_params(t_table *table, int argc, char *argv[]);
+int		parse_args(t_table *table, int argc, char *argv[]);
 
 // Simulation
-int		init_simulation(t_params params);
-int		one_philosopher(t_params params);
+int		init_simulation(t_table *table);
+int		one_philosopher(t_table *table);
 
 #endif

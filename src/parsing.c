@@ -6,25 +6,25 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:27 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 22:26:21 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/23 23:45:03 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-void	assign_params(t_params *params, int argc, char *argv[])
+void	assign_params(t_table *table, int argc, char *argv[])
 {
-	params->number_of_philosophers = ft_atoi(argv[1]);
-	params->time_to_die = ft_atoi(argv[2]);
-	params->time_to_eat = ft_atoi(argv[3]);
-	params->time_to_sleep = ft_atoi(argv[4]);
+	table->number_of_philosophers = ft_atoi(argv[1]);
+	table->time_to_die = ft_atoi(argv[2]);
+	table->time_to_eat = ft_atoi(argv[3]);
+	table->time_to_sleep = ft_atoi(argv[4]);
 	if (argc == 6)
-		params->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
+		table->number_of_times_each_philosopher_must_eat = ft_atoi(argv[5]);
 	else
-		params->number_of_times_each_philosopher_must_eat = -1;
+		table->number_of_times_each_philosopher_must_eat = -1;
 }
 
-int	parse_args(t_params *params, int argc, char *argv[])
+int	parse_args(t_table *table, int argc, char *argv[])
 {
 	if (!is_number(argv[1]) || ft_atoi(argv[1]) <= 0)
 		return (printf("Invalid number_of_philosophers\n"), 1);
@@ -37,6 +37,6 @@ int	parse_args(t_params *params, int argc, char *argv[])
 	if (argc == 6 && (!is_number(argv[5]) || ft_atoi(argv[5]) <= 0))
 		return (printf("Invalid "
 				"number_of_times_each_philosopher_must_eat\n"), 1);
-	assign_params(params, argc, argv);
+	assign_params(table, argc, argv);
 	return (0);
 }

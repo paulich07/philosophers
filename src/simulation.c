@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/23 23:00:00 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 00:03:59 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,67 +22,65 @@
 
 // creo array di forks (mutex)
 // vengono salvati in common mutexes
-int	init_forks(t_mutex *mutex, t_params *params)
+int	init_forks(t_table *table)
 {
 	int	i;
 
 	i = 0;
-	mutex->forks = malloc(params->number_of_philosophers
+	table->forks = malloc(table->number_of_philosophers
 			* sizeof(pthread_mutex_t));
-	if (!mutex->forks)
+	if (!table->forks)
 		return (printf("Error creating forks array\n"), 1);
-	while (i < params->number_of_philosophers)
+	while (i < table->number_of_philosophers)
 	{
-		pthread_mutex_init(&mutex->forks[i], NULL);
+		pthread_mutex_init(&table->forks[i], NULL);
 		i++;
 	}
 	return (0);
 }
 
 // inizializzo common mutexes
-int	init_common_mutex(t_mutex *mutex, t_params *params)
+int	init_common_mutex(t_table *table)
 {
-	if (init_forks(mutex, params) != 0)
+	if (init_forks(table) != 0)
 		return (1);
-	pthread_mutex_init(&mutex->check_death, NULL);
-	pthread_mutex_init(&mutex->log, NULL);
+	pthread_mutex_init(&table->check_death, NULL);
+	pthread_mutex_init(&table->print, NULL);
 	return (0);
 }
 
-// initialize threads, forks, mutexes, etc.
+void	init_philosophers(t_philo *philosophers, t_table *table)
+{
+	int	i;
+	int	n_of_philosophers;
+
+	i = 0;
+	n_of_philosophers = table->number_of_philosophers;
+	while (i < table->number_of_philosophers)
+	{
+		philosophers[i].id = i;
+		philosophers[i].meals = 0;
+		philosophers[i].starving_time = 0;
+		philosophers[i].fork_left = &table->forks[i];
+		philosophers[i].fork_left = &table->forks[(i + 1) % n_of_philosophers];
+		philosophers[i].table = table;
+		i++;
+	}
+}
+
+// initialize structs, forks, mutexes, threads.
 // run simulation
-int	init_simulation(t_params *params)
+int	init_simulation(t_table *table)
 {
 	t_philo	*philosophers;
-	t_mutex	common_mutex;
 
-	philosophers = malloc(params->number_of_philosophers * sizeof(t_philo));
+	philosophers = malloc(table->number_of_philosophers * sizeof(t_philo));
 	if (!philosophers)
-		return (printf("Error creating philosophers array\n"), 1);
-	if (init_common_mutex(&common_mutex, &params) != 0)
-		return (printf("Error initializing common mutex\n"), 1);
+		return (printf("Error creating philosophers array\n"),
+			free(philosophers), 1);
+	if (init_common_mutex(table) != 0)
+		return (printf("Error initializing common mutex\n"),
+			free(philosophers), 2);
+	init_philosophers(philosophers, table);
 
-		// pthread_t philosophers[params.number_of_philosophers];
-	// int i;
-	// t_philo philo[params.number_of_philosophers];
-
-	// pthread_mutex_init(&mutex, (void *)(&params));
-	// i = 0;
-	// while (i < params.number_of_philosophers)
-	// {
-	// 	// posso passare un solo param quindi aggiungo al filosofo il table
-	// 	if(pthread_create(&philosophers[i], NULL, &RUN SIMULATION, &philosopher) != 0)
-	// 		return (printf("Error creating thread\n"), 1);
-	// 	i++;
-	// 	printf("Philosopher %d created\n", i);
-	// }
-	// i = 0;
-	// while (i < params.number_of_philosophers)
-	// {
-	// 	if(pthread_join(philosophers[i], NULL) != 0)
-	// 		return (printf("Error joining thread\n"), 1);
-	// 	i++;
-	// 	printf("Philosopher %d joined the table\n", i);
-	// }
-	// pthread_mutex_destroy(&mutex);
 }
