@@ -6,14 +6,13 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:56:11 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 05:05:01 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
-// to do vedere se va altrimenti mettere handler immediatamente
-// prende una sola forchetta
+// aspetta lentamente la sua morte con una sola forchetta in mano
 void	handle_single_philosopher(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
@@ -23,15 +22,10 @@ void	handle_single_philosopher(t_philo *philo)
 		return ;
 	}
 	safe_print(philo, "has taken a fork");
-	// if (philo->table->n_philo == 1)
-	// {
-	// 	pthread_mutex_lock(philo->fork_left);
-	// 	safe_print(philo, "has taken a fork");
-	// 	while (!check_table_death(philo))
-	// 		usleep(100);
-	// 	pthread_mutex_unlock(philo->fork_left);
-	// 	return ;
-	// }
+	while (!check_table_death(philo))
+		usleep(100);
+	pthread_mutex_unlock(philo->fork_left);
+	return ;
 }
 
 // i filosofi pari prendono prima la forchetta a sinistra
