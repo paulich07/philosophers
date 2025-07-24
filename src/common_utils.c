@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 11:09:13 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:16:36 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,7 @@ int		is_everyone_satisfied(t_philo *philo)
 {
 	int	status;
 
+	status = 0;
 	if (philo->table->number_of_times_each_philosopher_must_eat <= 0)
 		return (0);
 	pthread_mutex_lock(&philo->table->satisfied);
