@@ -67,6 +67,9 @@ fclean: clean
 re: fclean all
 
 val: $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet --tool=helgrind ./$(NAME)
- 
-.PHONY: all clean fclean re val
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet ./$(NAME)
+
+hel: $(NAME)
+	@valgrind --tool=helgrind ./$(NAME)
+
+.PHONY: all clean fclean re val hel
