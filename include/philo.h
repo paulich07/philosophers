@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 07:45:45 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 08:24:46 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ int					init_threads(t_philo *philosophers, t_table *table);
 int					init_simulation(t_table *table);
 
 void				join_threads(t_philo *philosophers, t_table *table);
-int					one_philosopher(t_table *table);
 
 // Routine
 void				*eat_sleep_think_routine(void *arg);
@@ -83,9 +82,13 @@ int					think(t_philo *philo);
 // Common Utils
 int					check_table_death(t_philo *philo);
 void				safe_print(t_philo *philo, char *str);
+int					is_everyone_satisfied(t_philo *philo);
 
 void				update_starving(t_philo *philo);
 unsigned long long	get_starving_time(t_philo *philo);
+int					is_starved_to_death(t_philo *philo);
+void  			set_death(t_philo *philo);
+int					is_dead(t_philo *philo);
 
 // Cleanup
 void				free_forks(pthread_mutex_t *forks, int n);

@@ -29,7 +29,6 @@ SRCS =	\
 		$(SRC_DIR)/free_table.c \
 		$(SRC_DIR)/main.c \
 		$(SRC_DIR)/parsing.c \
-		$(SRC_DIR)/philo_utils.c \
 		$(SRC_DIR)/routine.c \
 		$(SRC_DIR)/simulation.c \
 		$(SRC_DIR)/simulation2.c \
