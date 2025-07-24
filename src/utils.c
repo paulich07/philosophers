@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 17:12:17 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 09:50:29 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:53:56 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,7 +45,7 @@ int	ft_atoi(const char *str)
 	return (res * sign);
 }
 
-int is_number(char *s)
+int	is_number(char *s)
 {
 	if (!s)
 		return (0);

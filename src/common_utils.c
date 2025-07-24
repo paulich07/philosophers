@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 11:16:36 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 17:05:57 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,15 +19,17 @@
 // return 1 if someone has died
 int	check_table_death(t_philo *philo)
 {
-	int status = is_starved_to_death(philo);
-	if (status )
+	int	status;
+
+	status = is_starved_to_death(philo);
+	if (status)
 	{
 		safe_print(philo, "died");
 		set_death(philo);
 	}
 	if (philo->table->number_of_times_each_philosopher_must_eat > 0
 		&& is_everyone_satisfied(philo))
-			return (safe_print(philo, "end"), 1);
+		return (safe_print(philo, "end"), 1);
 	return (0);
 }
 
@@ -47,7 +49,7 @@ void	safe_print(t_philo *philo, char *str)
 	pthread_mutex_unlock(&philo->table->print);
 }
 
-int		is_everyone_satisfied(t_philo *philo)
+int	is_everyone_satisfied(t_philo *philo)
 {
 	int	status;
 
@@ -58,7 +60,5 @@ int		is_everyone_satisfied(t_philo *philo)
 	if (philo->table->n_satisfied_philo > philo->table->number_of_philosophers)
 		status = 1;
 	pthread_mutex_unlock(&philo->table->satisfied);
-	// if (status > 0)
-	// 	set_death(philo);
 	return (status);
 }

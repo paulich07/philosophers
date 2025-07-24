@@ -6,23 +6,11 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 11:14:30 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 17:08:00 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
-
-// aspetta lentamente la sua morte con una sola forchetta in mano
-int	handle_single_philosopher(t_philo *philo)
-{
-	pthread_mutex_lock(philo->fork_left);
-	safe_print(philo, "has taken a fork");
-	while (!check_table_death(philo))
-		usleep(100);
-	pthread_mutex_unlock(philo->fork_left);
-	// return (check_table_death(philo));
-	return (0);
-}
 
 // i filosofi pari prendono prima la forchetta a sinistra
 int	take_forks_even(t_philo *philo)
@@ -89,6 +77,6 @@ int	ft_sleep(t_philo *philo)
 int	think(t_philo *philo)
 {
 	safe_print(philo, "is thinking");
-	usleep(100); // opzionale
+	usleep(100);
 	return (0);
 }

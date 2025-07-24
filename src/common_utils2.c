@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 11:02:08 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 16:57:02 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@ void	update_starving(t_philo *philo)
 unsigned long long	get_starving_time(t_philo *philo)
 {
 	unsigned long long	t;
+
 	pthread_mutex_lock(&philo->table->access_starving);
 	t = philo->start_starving_time;
 	pthread_mutex_unlock(&philo->table->access_starving);
@@ -31,7 +32,7 @@ unsigned long long	get_starving_time(t_philo *philo)
 int	is_starved_to_death(t_philo *philo)
 {
 	unsigned long long	now;
-	int		status;
+	int					status;
 
 	now = get_system_time_ms();
 	status = 0;
@@ -42,14 +43,14 @@ int	is_starved_to_death(t_philo *philo)
 	return (status);
 }
 
-void  set_death(t_philo *philo)
+void	set_death(t_philo *philo)
 {
 	pthread_mutex_lock(&philo->table->check_death);
 	philo->table->death = 1;
 	pthread_mutex_unlock(&philo->table->check_death);
 }
 
-int is_dead(t_philo *philo)
+int	is_dead(t_philo *philo)
 {
 	int	status;
 

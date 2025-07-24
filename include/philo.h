@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 09:50:10 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 17:07:35 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,14 +28,14 @@
 
 typedef struct s_table
 {
-	int									number_of_philosophers;
-	unsigned long long	time_to_die;
-	unsigned long long	time_to_eat;
-	unsigned long long	time_to_sleep;
-	int									number_of_times_each_philosopher_must_eat;
-	int									death;
-	unsigned long long	start_time;
-	int									n_satisfied_philo;
+	int						number_of_philosophers;
+	unsigned long long		time_to_die;
+	unsigned long long		time_to_eat;
+	unsigned long long		time_to_sleep;
+	int						number_of_times_each_philosopher_must_eat;
+	int						death;
+	unsigned long long		start_time;
+	int						n_satisfied_philo;
 	pthread_mutex_t			check_death;
 	pthread_mutex_t			print;
 	pthread_mutex_t			satisfied;
@@ -45,15 +45,14 @@ typedef struct s_table
 
 typedef struct s_philo
 {
-	int									id;
-	int									meals;
-	unsigned long long	start_starving_time;
-	pthread_t						thread;
+	int						id;
+	int						meals;
+	unsigned long long		start_starving_time;
+	pthread_t				thread;
 	pthread_mutex_t			*fork_left;
 	pthread_mutex_t			*fork_right;
-	t_table							*table;
+	t_table					*table;
 }	t_philo;
-
 
 // Parsing
 void				assign_params(t_table *table, int argc, char *argv[]);
@@ -67,12 +66,12 @@ int					init_threads(t_philo *philosophers, t_table *table);
 int					init_simulation(t_table *table);
 
 void				join_threads(t_philo *philosophers, t_table *table);
+int					handle_single_philosopher(t_philo *philo);
 
 // Routine
 void				*eat_sleep_think_routine(void *arg);
 
 // Actions
-int					handle_single_philosopher(t_philo *philo);
 int					take_forks_even(t_philo *philo);
 int					take_forks(t_philo *philo);
 int					eat(t_philo *philo);
@@ -87,7 +86,7 @@ int					is_everyone_satisfied(t_philo *philo);
 void				update_starving(t_philo *philo);
 unsigned long long	get_starving_time(t_philo *philo);
 int					is_starved_to_death(t_philo *philo);
-void  			set_death(t_philo *philo);
+void				set_death(t_philo *philo);
 int					is_dead(t_philo *philo);
 
 // Cleanup
@@ -100,7 +99,7 @@ unsigned long long	get_timestamp(t_table *table);
 
 // Utils
 int					ft_atoi(const char *str);
-int 				is_number(char *s);
+int					is_number(char *s);
 int					ft_strlen(char *s);
 
 #endif
