@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:13:19 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:43:24 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -78,6 +78,7 @@ int	init_threads(t_philo *philosophers, t_table *table)
 		if (pthread_create(&philosophers[i].thread, NULL,
 			eat_sleep_think_routine, &philosophers[i]) != 0)
 			return (printf("Error creating thread\n"), 1);
+		i++;
 	}
 	return (0);
 }
