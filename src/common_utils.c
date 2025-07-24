@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 08:30:12 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 08:45:50 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	safe_print(t_philo *philo, char *str)
 	unsigned long long	t;
 
 	pthread_mutex_lock(&philo->table->print);
-	if (philo->table->death != 0)
+	if (is_dead(philo))
 	{
 		pthread_mutex_unlock(&philo->table->print);
 		return ;
@@ -49,11 +49,12 @@ int		is_everyone_satisfied(t_philo *philo)
 {
 	int	status;
 
+	// fprintf(stderr, "is_everyone_satisfied\n");
 	status = 0;
 	if (philo->table->number_of_times_each_philosopher_must_eat <= 0)
-		return (status);
+		return (0);
 	pthread_mutex_lock(&philo->table->satisfied);
-	if (philo->table->n_satisfied_philo == philo->table->number_of_philosophers)
+	if (philo->table->n_satisfied_philo > philo->table->number_of_philosophers)
 		status = 2;
 	pthread_mutex_unlock(&philo->table->satisfied);
 	if (status)
