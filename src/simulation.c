@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 05:02:57 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 07:39:30 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	init_common_mutex(t_table *table)
 	pthread_mutex_init(&table->check_death, NULL);
 	pthread_mutex_init(&table->print, NULL);
 	pthread_mutex_init(&table->satisfied, NULL);
+	pthread_mutex_init(&table->access_starving, NULL);
 	return (0);
 }
 

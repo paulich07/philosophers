@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 06:43:44 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 07:20:22 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,7 @@ int	eat(t_philo *philo)
 		philo->table->n_satisfied_philo++;
 		pthread_mutex_unlock(&philo->table->satisfied);
 	}
-	philo->start_starving_time = get_system_time_ms();
+	update_starving(philo);
 	usleep(philo->table->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);

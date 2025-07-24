@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 06:46:04 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 07:44:11 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	check_table_death(t_philo *philo)
 	if (!status)
 	{
 		now = get_system_time_ms();
-		if ((now - philo->start_starving_time) > philo->table->time_to_die)
+		if ((now - get_starving_time(philo)) > philo->table->time_to_die)
 		{
 			philo->table->death = 1;
 			status = 1;
@@ -40,42 +40,25 @@ int	check_table_death(t_philo *philo)
 	}
 	pthread_mutex_unlock(&philo->table->check_death);
 	if (status == 1)
-			safe_print_after_death(philo, "died");
+		safe_print(philo, "died");
 	else if (status == 2)
-		safe_print_after_death(philo, "end");
+		safe_print(philo, "end");
 	return (status);
 }
 
-void	safe_print_after_death(t_philo *philo, char *str)
-{
-	unsigned long long	t;
-
-	pthread_mutex_lock(&philo->table->print);
-	t = get_system_time_ms() - philo->table->start_time;
-	printf("%-6llu %-4d %s\n", t, (philo->id) + 1, str);
-	pthread_mutex_unlock(&philo->table->print);
-}
-
 // non stampo nulla se death = 1
-// potrebbe esserci race condition se 
 void	safe_print(t_philo *philo, char *str)
 {
 	unsigned long long	t;
 
 	pthread_mutex_lock(&philo->table->print);
-	if (check_table_death(philo) != 0)
+	if (philo->table->death != 0)
 	{
 		pthread_mutex_unlock(&philo->table->print);
 		return ;
 	}
 	t = get_system_time_ms() - philo->table->start_time;
-	printf("%-6llu %-4d %s\n", t, (philo->id) + 1, str);
+	printf("%-6llu %-4d %s\n", t, philo->id, str);
 	pthread_mutex_unlock(&philo->table->print);
 }
 
-void	set_death(t_table *table)
-{
-	pthread_mutex_lock(&table->check_death);
-	table->death = 1;
-	pthread_mutex_unlock(&table->check_death);
-}

@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 05:43:34 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 07:45:45 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,7 @@ typedef struct s_table
 	pthread_mutex_t			check_death;
 	pthread_mutex_t			print;
 	pthread_mutex_t			satisfied;
+	pthread_mutex_t			access_starving;
 	pthread_mutex_t			*forks;
 }	t_table;
 
@@ -81,11 +82,10 @@ int					think(t_philo *philo);
 
 // Common Utils
 int					check_table_death(t_philo *philo);
-void				safe_print_after_death(t_philo *philo, char *str);
 void				safe_print(t_philo *philo, char *str);
-void				set_death(t_table *table);
 
-// Philo Utils
+void				update_starving(t_philo *philo);
+unsigned long long	get_starving_time(t_philo *philo);
 
 // Cleanup
 void				free_forks(pthread_mutex_t *forks, int n);

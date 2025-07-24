@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:48:32 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:53:26 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 07:39:25 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,5 +34,6 @@ int	free_table(t_table *table)
 	pthread_mutex_destroy(&table->check_death);
 	pthread_mutex_destroy(&table->print);
 	pthread_mutex_destroy(&table->satisfied);
+	pthread_mutex_destroy(&table->access_starving);
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:54:05 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 05:02:46 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 07:25:39 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,9 @@ int	main(int argc, char *argv[])
 			"[number_of_times_each_philosopher_must_eat]\n"), 1);
 	if (parse_args(&table, argc, argv) != 0)
 		return (1);
+	// if (argc == 5)
 	init_simulation(&table);
+	// else if (argc == 6)
+	// 	one_philosopher(&table);
 	return (0);
 }
