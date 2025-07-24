@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:13:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 17:08:32 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 17:22:25 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	*eat_sleep_think_routine(void *arg)
 			return (NULL);
 		}
 		if (is_everyone_satisfied(philo))
-		{
-			safe_print(philo, "end");
 			return (NULL);
-		}
 		if (take_forks(philo))
 			break ;
 		if (eat(philo))
