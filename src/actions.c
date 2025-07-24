@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 10:47:41 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:14:30 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,12 @@ int	ft_sleep(t_philo *philo)
 {
 	safe_print(philo, "is sleeping");
 	usleep(philo->table->time_to_sleep * 1000);
-	return (1);
+	return (0);
 }
 
 int	think(t_philo *philo)
 {
 	safe_print(philo, "is thinking");
 	usleep(100); // opzionale
-	return (1);
+	return (0);
 }
