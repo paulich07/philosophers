@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 03:30:24 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:10:58 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,9 +29,9 @@
 typedef struct s_table
 {
 	int					number_of_philosophers;
-	int					time_to_die;
-	int					time_to_eat;
-	int					time_to_sleep;
+	unsigned long long	time_to_die;
+	unsigned long long	time_to_eat;
+	unsigned long long	time_to_sleep;
 	int					number_of_times_each_philosopher_must_eat;
 	int					death;
 	unsigned long long	start_time;
@@ -73,11 +73,12 @@ void				*eat_sleep_think_routine(void *arg);
 void				take_forks_even(t_philo *philo);
 void				take_forks(t_philo *philo);
 void				eat(t_philo *philo);
-void				sleep(t_philo *philo);
+void				ft_sleep(t_philo *philo);
 void				think(t_philo *philo);
 
 // Common Utils
 int					check_table_death(t_philo *philo);
+void				safe_print_after_death(t_philo *philo, char *str);
 void				safe_print(t_philo *philo, char *str);
 void				set_death(t_table *table);
 
@@ -92,5 +93,9 @@ int					free_table(t_table *table);
 // Time
 unsigned long long	get_system_time_ms(void);
 unsigned long long	get_timestamp(t_table *table);
+
+// Utils
+int					ft_atoi(const char *str);
+int 				is_number(char *s);
 
 #endif

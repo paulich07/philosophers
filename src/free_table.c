@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:48:32 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 02:40:44 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:08:27 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,6 @@ void	free_forks(pthread_mutex_t *forks, int n)
 
 int	free_table(t_table *table)
 {
-	int	i;
-
 	free_forks(table->forks, table->number_of_philosophers);
 	pthread_mutex_destroy(&table->check_death);
 	pthread_mutex_destroy(&table->print);

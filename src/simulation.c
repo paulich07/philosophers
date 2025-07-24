@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 02:44:10 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:13:19 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,11 @@ int	init_threads(t_philo *philosophers, t_table *table)
 	i = 0;
 	while (i < table->number_of_philosophers)
 	{
-		pthread_create(&philosophers[i].thread, NULL,
-			eat_sleep_think_routine, &philosophers[i]);
+		if (pthread_create(&philosophers[i].thread, NULL,
+			eat_sleep_think_routine, &philosophers[i]) != 0)
+			return (printf("Error creating thread\n"), 1);
 	}
+	return (0);
 }
 
 // initialize structs, forks, mutexes, threads.
@@ -97,7 +99,7 @@ int	init_simulation(t_table *table)
 		return (printf("Error initializing common mutex\n"),
 			free(philosophers), 2);
 	init_philosophers(philosophers, table);
-	table->start_time = get_time_in_ms();
+	table->start_time = get_system_time_ms();
 	if (init_threads(philosophers, table) != 0)
 		return (printf("Error initializing threads\n"),
 			free(philosophers), free_table(table), 3);
@@ -106,4 +108,5 @@ int	init_simulation(t_table *table)
 	join_threads(philosophers, table);
 	free(philosophers);
 	free_table(table);
+	return (0);
 }

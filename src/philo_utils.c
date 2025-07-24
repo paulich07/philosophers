@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 01:48:41 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 03:29:53 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:10:06 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,13 +22,12 @@
 // 		pthread_mutex_unlock(right);
 // }
 
-
 int	check_starving_death(t_philo *philo)
 {
   unsigned long long	now;
 
   now = get_system_time_ms();
-	if (now - philo->start_starving_time > philo->table->time_to_die)
+	if ((now - philo->start_starving_time) > philo->table->time_to_die)
 	{
     set_death(philo->table);
 		safe_print_after_death(philo, "died");
