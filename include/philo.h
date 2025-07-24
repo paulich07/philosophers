@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:58:30 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 05:43:34 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,11 +72,12 @@ int					one_philosopher(t_table *table);
 void				*eat_sleep_think_routine(void *arg);
 
 // Actions
-void				take_forks_even(t_philo *philo);
-void				take_forks(t_philo *philo);
-void				eat(t_philo *philo);
-void				ft_sleep(t_philo *philo);
-void				think(t_philo *philo);
+int					handle_single_philosopher(t_philo *philo);
+int					take_forks_even(t_philo *philo);
+int					take_forks(t_philo *philo);
+int					eat(t_philo *philo);
+int					ft_sleep(t_philo *philo);
+int					think(t_philo *philo);
 
 // Common Utils
 int					check_table_death(t_philo *philo);

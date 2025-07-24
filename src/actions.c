@@ -6,36 +6,36 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 05:34:15 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 05:45:42 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
 // aspetta lentamente la sua morte con una sola forchetta in mano
-void	handle_single_philosopher(t_philo *philo)
+int	handle_single_philosopher(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
 	if (check_table_death(philo))
 	{
 		pthread_mutex_unlock(philo->fork_left);
-		return ;
+		return (check_table_death(philo));
 	}
 	safe_print(philo, "has taken a fork");
 	while (!check_table_death(philo))
 		usleep(100);
 	pthread_mutex_unlock(philo->fork_left);
-	return ;
+	return (check_table_death(philo));
 }
 
 // i filosofi pari prendono prima la forchetta a sinistra
-void	take_forks_even(t_philo *philo)
+int	take_forks_even(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
 	if (check_table_death(philo))
 	{
 		pthread_mutex_unlock(philo->fork_left);
-		return ;
+		return (check_table_death(philo));
 	}
 	safe_print(philo, "has taken a fork");
 	pthread_mutex_lock(philo->fork_right);
@@ -43,26 +43,27 @@ void	take_forks_even(t_philo *philo)
 	{
 			pthread_mutex_unlock(philo->fork_left);
 			pthread_mutex_unlock(philo->fork_right);
-		return ;
+		return (check_table_death(philo));
 	}
 	safe_print(philo, "has taken a fork");
+	return (check_table_death(philo));
 }
 
 // per evitare deadlock i filosofi pari prendono prima a sinistra
 // e i filosofi dispari prendono prima a destra
-void	take_forks(t_philo *philo)
+int	take_forks(t_philo *philo)
 {
 	if (philo->table->number_of_philosophers == 1)
-		handle_single_philosopher(philo);
+		return (handle_single_philosopher(philo));
 	else if (philo->id % 2 == 0)
-		take_forks_even(philo);
+		return (take_forks_even(philo));
 	else
 	{
 		pthread_mutex_lock(philo->fork_right);
 		if (check_table_death(philo))
 		{
 			pthread_mutex_unlock(philo->fork_right);
-			return ;
+			return (check_table_death(philo));
 		}
 		safe_print(philo, "has taken a fork");
 		pthread_mutex_lock(philo->fork_left);
@@ -70,23 +71,24 @@ void	take_forks(t_philo *philo)
 		{
 			pthread_mutex_unlock(philo->fork_right);
 			pthread_mutex_unlock(philo->fork_left);
-			return ;
+			return (check_table_death(philo));
 		}
 		safe_print(philo, "has taken a fork");
 	}
+	return (check_table_death(philo));
 }
 
 // mangio, sblocco forchette e aggiorno start_starving_time
-void	eat(t_philo *philo)
+int	eat(t_philo *philo)
 {
 	if (check_table_death(philo) != 0)
 	{
 		pthread_mutex_unlock(philo->fork_right);
 		pthread_mutex_unlock(philo->fork_left);
-		return ;
+		return (check_table_death(philo));
 	}
 	if (philo->fork_left == NULL || philo->fork_right == NULL)
-		return ;
+		return (check_table_death(philo));
 	safe_print(philo, "is eating");
 	philo->meals++;
 	if (philo->meals == philo->table->number_of_times_each_philosopher_must_eat)
@@ -99,20 +101,23 @@ void	eat(t_philo *philo)
 	usleep(philo->table->time_to_eat * 1000);
 	pthread_mutex_unlock(philo->fork_left);
 	pthread_mutex_unlock(philo->fork_right);
+	return (check_table_death(philo));
 }
 
-void	ft_sleep(t_philo *philo)
+int	ft_sleep(t_philo *philo)
 {
 	if (check_table_death(philo))
-		return ;
+		return (check_table_death(philo));
 	safe_print(philo, "is sleeping");
 	usleep(philo->table->time_to_sleep * 1000);
+	return (check_table_death(philo));
 }
 
-void	think(t_philo *philo)
+int	think(t_philo *philo)
 {
 	if (check_table_death(philo))
-		return ;
+		return (1);
 	safe_print(philo, "is thinking");
 	usleep(100); // opzionale
+	return (check_table_death(philo));
 }
