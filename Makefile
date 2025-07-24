@@ -66,10 +66,12 @@ fclean: clean
 
 re: fclean all
 
+# usage make val ARGS="arg1 arg2"
 val: $(NAME)
-	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet ./$(NAME)
+	@valgrind --leak-check=full --show-leak-kinds=all --track-origins=yes --quiet ./$(NAME) $(ARGS)
 
+# usage make hel ARGS="arg1 arg2"
 hel: $(NAME)
-	@valgrind --tool=helgrind ./$(NAME)
+	@valgrind --tool=helgrind ./$(NAME) $(ARGS)
 
 .PHONY: all clean fclean re val hel
