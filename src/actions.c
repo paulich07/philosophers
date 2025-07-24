@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 08:43:07 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 10:47:41 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,43 +16,21 @@
 int	handle_single_philosopher(t_philo *philo)
 {
 	pthread_mutex_lock(philo->fork_left);
-	if (check_table_death(philo))
-	{
-		pthread_mutex_unlock(philo->fork_left);
-		return (1);
-	}
 	safe_print(philo, "has taken a fork");
 	while (!check_table_death(philo))
 		usleep(100);
 	pthread_mutex_unlock(philo->fork_left);
-	return (check_table_death(philo));
+	// return (check_table_death(philo));
+	return (0);
 }
 
 // i filosofi pari prendono prima la forchetta a sinistra
 int	take_forks_even(t_philo *philo)
 {
-	if (check_table_death(philo))
-    return (1);
 	pthread_mutex_lock(philo->fork_left);
-	if (check_table_death(philo))
-	{
-		pthread_mutex_unlock(philo->fork_left);
-		return (1);
-	}
 	safe_print(philo, "has taken a fork");
 	usleep(100);
-	if (check_table_death(philo))
-	{
-		pthread_mutex_unlock(philo->fork_left);
-		return (1);
-	}
 	pthread_mutex_lock(philo->fork_right);
-	if (check_table_death(philo))
-	{
-		pthread_mutex_unlock(philo->fork_left);
-		pthread_mutex_unlock(philo->fork_right);
-		return (1);
-	}
 	safe_print(philo, "has taken a fork");
 	return (0);
 }
@@ -67,23 +45,9 @@ int	take_forks(t_philo *philo)
 		return (take_forks_even(philo));
 	else
 	{
-		if (check_table_death(philo))
-			return (1);
 		pthread_mutex_lock(philo->fork_right);
-		if (check_table_death(philo))
-		{
-			pthread_mutex_unlock(philo->fork_right);
-			return (1);
-		}
 		safe_print(philo, "has taken a fork");
-		usleep(100);
 		pthread_mutex_lock(philo->fork_left);
-		if (check_table_death(philo))
-		{
-			pthread_mutex_unlock(philo->fork_right);
-			pthread_mutex_unlock(philo->fork_left);
-			return (1);
-		}
 		safe_print(philo, "has taken a fork");
 	}
 	return (0);
@@ -117,18 +81,14 @@ int	eat(t_philo *philo)
 
 int	ft_sleep(t_philo *philo)
 {
-	if (check_table_death(philo))
-		return (1);
 	safe_print(philo, "is sleeping");
 	usleep(philo->table->time_to_sleep * 1000);
-	return (check_table_death(philo));
+	return (1);
 }
 
 int	think(t_philo *philo)
 {
-	if (check_table_death(philo))
-		return (1);
 	safe_print(philo, "is thinking");
 	usleep(100); // opzionale
-	return (check_table_death(philo));
+	return (1);
 }

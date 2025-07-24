@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 08:41:31 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:02:08 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,8 +39,6 @@ int	is_starved_to_death(t_philo *philo)
 	if ((now - philo->start_starving_time) > philo->table->time_to_die)
 		status = 1;
 	pthread_mutex_unlock(&philo->table->access_starving);
-	if (status)
-		set_death(philo);
 	return (status);
 }
 

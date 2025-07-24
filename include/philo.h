@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 08:24:46 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 09:50:10 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -101,5 +101,6 @@ unsigned long long	get_timestamp(t_table *table);
 // Utils
 int					ft_atoi(const char *str);
 int 				is_number(char *s);
+int					ft_strlen(char *s);
 
 #endif

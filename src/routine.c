@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:13:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 06:04:16 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 11:04:08 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,14 @@ void	*eat_sleep_think_routine(void *arg)
 	t_philo	*philo;
 
 	philo = (t_philo *) arg;
-	while (!check_table_death(philo))
+	while (!is_dead(philo))
 	{
+		if (is_starved_to_death(philo))
+		{
+			safe_print(philo, "died");
+			set_death(philo);
+			return (NULL);
+		}
 		if (take_forks(philo))
 			break ;
 		if (eat(philo))
