@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:10:58 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:31:40 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,8 +83,6 @@ void				safe_print(t_philo *philo, char *str);
 void				set_death(t_table *table);
 
 // Philo Utils
-int					check_starving_death(t_philo *philo);
-// void				release_forks(pthread_mutex_t *left, pthread_mutex_t *right);
 
 // Cleanup
 void				free_forks(pthread_mutex_t *forks, int n);

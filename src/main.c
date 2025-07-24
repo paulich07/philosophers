@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:54:05 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 02:42:11 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:14:35 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,9 +21,9 @@ int	main(int argc, char *argv[])
 		return (printf("Wrong usage of arguments\n"), 1);
 	if (parse_args(&table, argc, argv) != 0)
 		return (1);
-	if (argc == 5)
+	// if (argc == 5)
 		init_simulation(&table);
-	else if (argc == 6)
-		one_philosopher(&table);
+	// else if (argc == 6)
+	// 	one_philosopher(&table);
 	return (0);
 }

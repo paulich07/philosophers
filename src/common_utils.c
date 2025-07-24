@@ -6,20 +6,37 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:00:45 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:31:52 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// end simulation if
+// - someone in the table has died
+// - philo has reached time_to_die
+// - everyone has reached the number of meals
+// return 1 if someone has died
 int	check_table_death(t_philo *philo)
 {
-	int	rip;
+	int	status;
+  unsigned long long	now;
 
 	pthread_mutex_lock(&philo->table->check_death);
-	rip = philo->table->death;
+	status = philo->table->death;
+	if (!status)
+	{
+		now = get_system_time_ms();
+		if ((now - philo->start_starving_time) > philo->table->time_to_die)
+		{
+			philo->table->death = 1;
+			safe_print_after_death(philo, "died");
+			status = 1;
+		}
+	}
+	// check if everyone has eaten all the meals
 	pthread_mutex_unlock(&philo->table->check_death);
-	return (rip);
+	return (status);
 }
 
 void	safe_print_after_death(t_philo *philo, char *str)
