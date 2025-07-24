@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 06:07:35 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 06:43:44 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,8 @@ int	handle_single_philosopher(t_philo *philo)
 // i filosofi pari prendono prima la forchetta a sinistra
 int	take_forks_even(t_philo *philo)
 {
+	if (check_table_death(philo))
+    return (1);
 	pthread_mutex_lock(philo->fork_left);
 	if (check_table_death(philo))
 	{
@@ -38,15 +40,21 @@ int	take_forks_even(t_philo *philo)
 		return (1);
 	}
 	safe_print(philo, "has taken a fork");
+	usleep(100);
+	if (check_table_death(philo))
+	{
+		pthread_mutex_unlock(philo->fork_left);
+		return (1);
+	}
 	pthread_mutex_lock(philo->fork_right);
 	if (check_table_death(philo))
 	{
-			pthread_mutex_unlock(philo->fork_left);
-			pthread_mutex_unlock(philo->fork_right);
+		pthread_mutex_unlock(philo->fork_left);
+		pthread_mutex_unlock(philo->fork_right);
 		return (1);
 	}
 	safe_print(philo, "has taken a fork");
-	return (check_table_death(philo));
+	return (0);
 }
 
 // per evitare deadlock i filosofi pari prendono prima a sinistra
@@ -59,6 +67,8 @@ int	take_forks(t_philo *philo)
 		return (take_forks_even(philo));
 	else
 	{
+		if (check_table_death(philo))
+			return (1);
 		pthread_mutex_lock(philo->fork_right);
 		if (check_table_death(philo))
 		{
@@ -66,6 +76,7 @@ int	take_forks(t_philo *philo)
 			return (1);
 		}
 		safe_print(philo, "has taken a fork");
+		usleep(100);
 		pthread_mutex_lock(philo->fork_left);
 		if (check_table_death(philo))
 		{
@@ -75,7 +86,7 @@ int	take_forks(t_philo *philo)
 		}
 		safe_print(philo, "has taken a fork");
 	}
-	return (check_table_death(philo));
+	return (0);
 }
 
 // mangio, sblocco forchette e aggiorno start_starving_time

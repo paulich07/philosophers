@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 06:00:11 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 06:46:04 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ void	safe_print_after_death(t_philo *philo, char *str)
 
 	pthread_mutex_lock(&philo->table->print);
 	t = get_system_time_ms() - philo->table->start_time;
-	printf("%-6llu %-4d %s\n", t, philo->id, str);
+	printf("%-6llu %-4d %s\n", t, (philo->id) + 1, str);
 	pthread_mutex_unlock(&philo->table->print);
 }
 
@@ -69,7 +69,7 @@ void	safe_print(t_philo *philo, char *str)
 		return ;
 	}
 	t = get_system_time_ms() - philo->table->start_time;
-	printf("%-6llu %-4d %s\n", t, philo->id, str);
+	printf("%-6llu %-4d %s\n", t, (philo->id) + 1, str);
 	pthread_mutex_unlock(&philo->table->print);
 }
 
