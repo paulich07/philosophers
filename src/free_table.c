@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:48:32 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:08:27 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:53:26 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,5 +33,6 @@ int	free_table(t_table *table)
 	free_forks(table->forks, table->number_of_philosophers);
 	pthread_mutex_destroy(&table->check_death);
 	pthread_mutex_destroy(&table->print);
+	pthread_mutex_destroy(&table->satisfied);
 	return (0);
 }

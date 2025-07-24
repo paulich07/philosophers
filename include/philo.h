@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 04:31:40 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 04:58:30 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,27 +28,29 @@
 
 typedef struct s_table
 {
-	int					number_of_philosophers;
+	int									number_of_philosophers;
 	unsigned long long	time_to_die;
 	unsigned long long	time_to_eat;
 	unsigned long long	time_to_sleep;
-	int					number_of_times_each_philosopher_must_eat;
-	int					death;
+	int									number_of_times_each_philosopher_must_eat;
+	int									death;
 	unsigned long long	start_time;
-	pthread_mutex_t		check_death;
-	pthread_mutex_t		print;
-	pthread_mutex_t		*forks;
+	int									n_satisfied_philo;
+	pthread_mutex_t			check_death;
+	pthread_mutex_t			print;
+	pthread_mutex_t			satisfied;
+	pthread_mutex_t			*forks;
 }	t_table;
 
 typedef struct s_philo
 {
-	int					id;
-	int					meals;
+	int									id;
+	int									meals;
 	unsigned long long	start_starving_time;
-	pthread_t			thread;
-	pthread_mutex_t		*fork_left;
-	pthread_mutex_t		*fork_right;
-	t_table				*table;
+	pthread_t						thread;
+	pthread_mutex_t			*fork_left;
+	pthread_mutex_t			*fork_right;
+	t_table							*table;
 }	t_philo;
 
 
