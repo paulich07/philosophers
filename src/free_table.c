@@ -6,12 +6,13 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 23:48:32 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 00:11:10 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 02:40:44 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "philo.h"
 
+// Attenzione: unlockare i mutex prima di distruggerli
 void	free_forks(pthread_mutex_t *forks, int n)
 {
 	int	i;

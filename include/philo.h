@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 01:48:23 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 03:30:24 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,25 +57,33 @@ void				assign_params(t_table *table, int argc, char *argv[]);
 int					parse_args(t_table *table, int argc, char *argv[]);
 
 // Simulation
+int					init_forks(t_table *table);
+int					init_common_mutex(t_table *table);
+void				init_philosophers(t_philo *philosophers, t_table *table);
+int					init_threads(t_philo *philosophers, t_table *table);
 int					init_simulation(t_table *table);
+
+void				join_threads(t_philo *philosophers, t_table *table);
 int					one_philosopher(t_table *table);
 
 // Routine
 void				*eat_sleep_think_routine(void *arg);
 
 // Actions
+void				take_forks_even(t_philo *philo);
 void				take_forks(t_philo *philo);
 void				eat(t_philo *philo);
 void				sleep(t_philo *philo);
 void				think(t_philo *philo);
 
 // Common Utils
+int					check_table_death(t_philo *philo);
 void				safe_print(t_philo *philo, char *str);
-int					set_death(t_table *table);
-int					check_death(t_philo *philo);
+void				set_death(t_table *table);
 
 // Philo Utils
 int					check_starving_death(t_philo *philo);
+// void				release_forks(pthread_mutex_t *left, pthread_mutex_t *right);
 
 // Cleanup
 void				free_forks(pthread_mutex_t *forks, int n);
