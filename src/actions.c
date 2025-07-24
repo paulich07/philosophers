@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:26:24 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 05:05:01 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/24 05:34:15 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,6 +85,8 @@ void	eat(t_philo *philo)
 		pthread_mutex_unlock(philo->fork_left);
 		return ;
 	}
+	if (philo->fork_left == NULL || philo->fork_right == NULL)
+		return ;
 	safe_print(philo, "is eating");
 	philo->meals++;
 	if (philo->meals == philo->table->number_of_times_each_philosopher_must_eat)
