@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/25 18:29:10 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/25 19:58:18 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,8 +106,8 @@ int	init_simulation(t_table *table)
 		return (printf("Error initializing threads\n"),
 			free(philosophers), free_table(table), 3);
 	pthread_create(&monitor, NULL, monitor_routine, philosophers);
-	pthread_detach(monitor);
 	join_threads(philosophers, table);
+	pthread_join(monitor, NULL);
 	free(philosophers);
 	free_table(table);
 	return (0);

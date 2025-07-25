@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 21:07:06 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/25 18:22:59 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/25 20:05:32 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ int	check_table_death(t_philo *philo)
 	{
 		safe_print(philo, "died");
 		set_death(philo);
+		return (1);
 	}
 	if (philo->table->number_of_times_each_philosopher_must_eat > 0
 		&& is_everyone_satisfied(philo))
@@ -45,7 +46,7 @@ void	safe_print(t_philo *philo, char *str)
 		return ;
 	}
 	t = get_system_time_ms() - philo->table->start_time;
-	printf("%-6llu %-4d %s\n", t, philo->id, str);
+	printf("%-5llu %-3d %s\n", t, philo->id, str);
 	pthread_mutex_unlock(&philo->table->print);
 }
 
