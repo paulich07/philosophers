@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/04/29 15:51:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 17:07:35 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:19:05 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@ int					handle_single_philosopher(t_philo *philo);
 
 // Routine
 void				*eat_sleep_think_routine(void *arg);
+void				*monitor_routine(void *arg);
 
 // Actions
 int					take_forks_even(t_philo *philo);

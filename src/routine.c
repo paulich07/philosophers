@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/24 00:13:09 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 17:38:06 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:26:06 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,26 @@ void	*eat_sleep_think_routine(void *arg)
 		think(philo);
 	}
 	return (NULL);
+}
+
+void	*monitor_routine(void *arg)
+{
+	int		i;
+	t_philo	*philo;
+	t_table	*table;
+
+	philo = (t_philo *) arg;
+	table = philo->table;
+	while (1)
+	{
+		i = 0;
+		while (i < table->number_of_philosophers)
+		{
+			if (check_table_death(&philo[i]))
+				return (NULL);
+			i++;
+		}
+		i = 0;
+		usleep(500);
+	}
 }

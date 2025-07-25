@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/24 16:54:32 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/25 18:29:10 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,12 +91,12 @@ int	init_threads(t_philo *philosophers, t_table *table)
 // to avoid elapsed time before the threads are created
 int	init_simulation(t_table *table)
 {
-	t_philo	*philosophers;
+	t_philo		*philosophers;
+	pthread_t	monitor;
 
 	philosophers = malloc(table->number_of_philosophers * sizeof(t_philo));
 	if (!philosophers)
-		return (printf("Error creating philosophers array\n"),
-			free(philosophers), 1);
+		return (printf("Error creating philosophers array\n"),1);
 	if (init_common_mutex(table) != 0)
 		return (printf("Error initializing common mutex\n"),
 			free(philosophers), 2);
@@ -105,6 +105,8 @@ int	init_simulation(t_table *table)
 	if (init_threads(philosophers, table) != 0)
 		return (printf("Error initializing threads\n"),
 			free(philosophers), free_table(table), 3);
+	pthread_create(&monitor, NULL, monitor_routine, philosophers);
+	pthread_detach(monitor);
 	join_threads(philosophers, table);
 	free(philosophers);
 	free_table(table);
