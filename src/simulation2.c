@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/23 22:30:20 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/25 18:18:27 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/25 21:26:33 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,4 +40,3 @@ int	handle_single_philosopher(t_philo *philo)
 	set_death(philo);
 	return (1);
 }
-

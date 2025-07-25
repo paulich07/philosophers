@@ -6,7 +6,7 @@
 /*   By: plichota <plichota@student.42firenze.it    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/07/22 13:00:21 by plichota          #+#    #+#             */
-/*   Updated: 2025/07/25 19:58:18 by plichota         ###   ########.fr       */
+/*   Updated: 2025/07/25 21:26:52 by plichota         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,7 +96,7 @@ int	init_simulation(t_table *table)
 
 	philosophers = malloc(table->number_of_philosophers * sizeof(t_philo));
 	if (!philosophers)
-		return (printf("Error creating philosophers array\n"),1);
+		return (printf("Error creating philosophers array\n"), 1);
 	if (init_common_mutex(table) != 0)
 		return (printf("Error initializing common mutex\n"),
 			free(philosophers), 2);
